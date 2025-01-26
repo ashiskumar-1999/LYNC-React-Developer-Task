@@ -32,7 +32,7 @@ const Uploader = ({
             type="file"
             className="hidden"
             onChange={handleChange}
-            {...(isFolder && ({ webkitdirectory: "true" } as any))}
+            {...(isFolder && { webkitdirectory: "true" })}
           />
         </Label>
       </div>

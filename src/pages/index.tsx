@@ -6,7 +6,7 @@ import { FileObject } from "@/types";
 
 export default function Home() {
   const [fileName, setFileName] = useState("No File Chosen");
-  const [file, setFile] = useState<any>();
+  const [file, setFile] = useState<File | FileList | null>();
   const [uploadFiles, setUploadFiles] = useState<FileObject[]>([]);
   const [isFolderUpload, setIsFolderUpload] = useState<boolean>(false);
 
@@ -23,7 +23,7 @@ export default function Home() {
         setFileName(uploadedFiles[0].name);
       }
 
-      setFile(uploadedFiles);
+      setFile(uploadedFiles[0]);
     } else {
       setFileName("No files or folder chosen");
       setFile(null);
@@ -34,7 +34,7 @@ export default function Home() {
     if (fileName !== "" && file) {
       let fileObjects: FileObject[] = [];
 
-      if (isFolderUpload) {
+      if (isFolderUpload && file instanceof FileList) {
         // Handle folder upload
         fileObjects = await processFolder(file);
       } else {
