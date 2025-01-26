@@ -38,7 +38,7 @@ const Uploader = ({
       </div>
       <Button
         variant="default"
-        disabled={fileName === "No File Chosen" && true}
+        disabled={fileName === "No files or folder chosen" && true}
         className=" w-full bg-indigo-600 hover:bg-indigo-600"
         onClick={onUpload}
       >

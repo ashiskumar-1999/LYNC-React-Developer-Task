@@ -56,9 +56,9 @@ const SideNav = ({ files, handleEdit, handleDelete }: SideNavProps) => {
 
   return (
     <Sidebar>
-      <SidebarContent className="bg-slate-300">
+      <SidebarContent className="bg-indigo-400">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-lg font-semibold text-slate-800">
+          <SidebarGroupLabel className="pt-6 text-3xl font-semibold text-white">
             File Explorer
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -70,6 +70,7 @@ const SideNav = ({ files, handleEdit, handleDelete }: SideNavProps) => {
                 >
                   {editingId === file.id ? (
                     <Input
+                      className="my-8 text-lg font-normal text-white hover:bg-transparent hover:text-white"
                       value={editingName}
                       onChange={(e) => setEditingName(e.target.value)}
                       onBlur={finishEditing}
@@ -87,7 +88,7 @@ const SideNav = ({ files, handleEdit, handleDelete }: SideNavProps) => {
                     />
                   ) : (
                     <SidebarMenuButton
-                      className="text-sm font-normal text-slate-600"
+                      className="my-8 text-lg font-normal text-white hover:bg-transparent hover:text-white"
                       onClick={() => handleRoute(file.name)}
                     >
                       {file.name}
@@ -95,7 +96,7 @@ const SideNav = ({ files, handleEdit, handleDelete }: SideNavProps) => {
                   )}
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Ellipsis />
+                      <Ellipsis className="text-white" />
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                       <DropdownMenuItem

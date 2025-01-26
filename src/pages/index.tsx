@@ -5,7 +5,7 @@ import Sidebar from "@/components/SideNav";
 import { FileObject } from "@/types";
 
 export default function Home() {
-  const [fileName, setFileName] = useState("No File Chosen");
+  const [fileName, setFileName] = useState("No files or folder chosen");
   const [file, setFile] = useState<File | FileList | null>();
   const [uploadFiles, setUploadFiles] = useState<FileObject[]>([]);
   const [isFolderUpload, setIsFolderUpload] = useState<boolean>(false);
