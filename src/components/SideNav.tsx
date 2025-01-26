@@ -56,9 +56,11 @@ const SideNav = ({ files, handleEdit, handleDelete }: SideNavProps) => {
 
   return (
     <Sidebar>
-      <SidebarContent className="bg-red-200">
+      <SidebarContent className="bg-slate-300">
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-lg font-semibold text-slate-800">
+            File Explorer
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {files.map((file) => (
@@ -84,7 +86,10 @@ const SideNav = ({ files, handleEdit, handleDelete }: SideNavProps) => {
                       autoFocus
                     />
                   ) : (
-                    <SidebarMenuButton onClick={() => handleRoute(file.name)}>
+                    <SidebarMenuButton
+                      className="text-sm font-normal text-slate-600"
+                      onClick={() => handleRoute(file.name)}
+                    >
                       {file.name}
                     </SidebarMenuButton>
                   )}
