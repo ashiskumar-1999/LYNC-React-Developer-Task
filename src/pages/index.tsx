@@ -5,12 +5,15 @@ import SideNav from "@/components/SideNav";
 import { FileObject } from "@/types";
 import { Button } from "@/components/ui/button";
 import ProcessFolder from "@/utils/ProcessFolder";
+import { useToast } from "@/hooks/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function Home() {
   const [fileName, setFileName] = useState("No files or folder chosen");
   const [file, setFile] = useState<File | FileList | null>();
   const [uploadFiles, setUploadFiles] = useState<FileObject[]>([]);
   const [isFolderUpload, setIsFolderUpload] = useState(false);
+  const { toast } = useToast();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const uploadedFiles = event.target.files;
@@ -34,31 +37,39 @@ export default function Home() {
 
   const handleUpload = async () => {
     if (fileName !== "" && file) {
-      let fileObjects: FileObject[] = [];
+      const duplicateFile = uploadFiles.find((file) => file.name === fileName);
+      console.log("Duplicate Files:", duplicateFile);
+      if (duplicateFile?.name !== fileName) {
+        let fileObjects: FileObject[] = [];
 
-      if (isFolderUpload && file instanceof FileList) {
-        // Handle folder upload
-        fileObjects = await ProcessFolder(file, uploadFiles);
+        if (isFolderUpload && file instanceof FileList) {
+          // Handle folder upload
+          fileObjects = await ProcessFolder(file, uploadFiles);
+        } else {
+          // Handle single file upload
+          const convertedFile = await ImageConverter(file);
+          fileObjects.push({
+            id: uploadFiles.length + 1,
+            name: fileName,
+            type: "file",
+            url: convertedFile,
+          });
+        }
+
+        // Update uploadFiles with new files or folder structure
+        const updatedFiles = [...uploadFiles, ...fileObjects];
+        setUploadFiles(updatedFiles);
+
+        // Save to localStorage
+        window.localStorage.setItem(
+          "uploadedFiles",
+          JSON.stringify(updatedFiles)
+        );
       } else {
-        // Handle single file upload
-        const convertedFile = await ImageConverter(file);
-        fileObjects.push({
-          id: uploadFiles.length + 1,
-          name: fileName,
-          type: "file",
-          url: convertedFile,
+        toast({
+          description: "This File already exists!",
         });
       }
-
-      // Update uploadFiles with new files or folder structure
-      const updatedFiles = [...uploadFiles, ...fileObjects];
-      setUploadFiles(updatedFiles);
-
-      // Save to localStorage
-      window.localStorage.setItem(
-        "uploadedFiles",
-        JSON.stringify(updatedFiles)
-      );
 
       // Reset file input
       setFileName("No files or folder Chosen");
@@ -138,6 +149,7 @@ export default function Home() {
           onUpload={handleUpload}
           isFolder={isFolderUpload}
         />
+        <Toaster />
       </div>
     </div>
   );
