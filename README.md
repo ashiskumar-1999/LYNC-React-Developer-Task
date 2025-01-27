@@ -36,10 +36,7 @@ You can open [http://localhost:3000](http://localhost:3000) with your browser.
   - Click on the icon on the right side of the file name.  
   - A menu will appear, allowing you to choose between editing or deleting the file.  
   - Select your desired operation and the corresponding action will be performed.
-<img width="500" alt="Screenshot 2025-01-27 at 11 01 55 AM" src="https://github.com/user-attachments/assets/54b69217-5788-430a-8f50-25f509880166" />
-<img width="500" alt="Screenshot 2025-01-27 at 11 01 21 AM" src="https://github.com/user-attachments/assets/48e4c07f-06de-4141-9b19-a499cb50066e" />
-<img width="500" alt="Screenshot 2025-01-27 at 11 01 28 AM" src="https://github.com/user-attachments/assets/2de7e8b4-3bba-4eca-9e9c-91faf89762ab" />
-<img width="500" alt="Screenshot 2025-01-27 at 11 01 45 AM" src="https://github.com/user-attachments/assets/1d2e72d1-46d8-486e-8135-a2425470b255" />
+
 
 ## Dependencies
 - Next.js
