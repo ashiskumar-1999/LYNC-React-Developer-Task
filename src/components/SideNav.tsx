@@ -19,6 +19,7 @@ import { Ellipsis } from "lucide-react";
 import { Input } from "./ui/input";
 import { useRouter } from "next/navigation";
 import { FileObject } from "@/types";
+import TruncateFileName from "@/utils/TruncateFileName";
 
 type SideNavProps = {
   files: FileObject[];
@@ -91,7 +92,7 @@ const SideNav = ({ files, handleEdit, handleDelete }: SideNavProps) => {
                       className="text-lg font-normal text-white hover:bg-transparent hover:text-white"
                       onClick={() => handleRoute(file.name)}
                     >
-                      {file.name}
+                      {TruncateFileName(file.name)}
                     </SidebarMenuButton>
                   )}
                   <DropdownMenu>
