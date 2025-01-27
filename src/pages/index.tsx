@@ -5,15 +5,12 @@ import SideNav from "@/components/SideNav";
 import { FileObject } from "@/types";
 import { Button } from "@/components/ui/button";
 import ProcessFolder from "@/utils/ProcessFolder";
-import { useToast } from "@/hooks/use-toast";
-import { Toaster } from "@/components/ui/toaster";
 
 export default function Home() {
   const [fileName, setFileName] = useState("No files or folder chosen");
   const [file, setFile] = useState<File | FileList | null>();
   const [uploadFiles, setUploadFiles] = useState<FileObject[]>([]);
   const [isFolderUpload, setIsFolderUpload] = useState(false);
-  const { toast } = useToast();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const uploadedFiles = event.target.files;
@@ -65,10 +62,6 @@ export default function Home() {
           "uploadedFiles",
           JSON.stringify(updatedFiles)
         );
-      } else {
-        /* toast({
-          description: "This File already exists!",
-        }); */
       }
 
       // Reset file input
@@ -149,7 +142,6 @@ export default function Home() {
           onUpload={handleUpload}
           isFolder={isFolderUpload}
         />
-        <Toaster />
       </div>
     </div>
   );
