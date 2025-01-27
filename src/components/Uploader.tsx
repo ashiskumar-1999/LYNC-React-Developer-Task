@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -16,6 +16,17 @@ const Uploader = ({
   handleChange,
   isFolder,
 }: uploaderProps) => {
+  const folderRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (folderRef.current && isFolder) {
+      folderRef.current.setAttribute("webkitdirectory", "true");
+      folderRef.current.setAttribute("directory", "true");
+    } else if (folderRef.current && !isFolder) {
+      folderRef.current.removeAttribute("webkitdirectory");
+      folderRef.current.removeAttribute("directory");
+    }
+  }, [isFolder]);
+
   return (
     <div className="space-y-8">
       <div className="flex justify-center items-center min-w-[35rem] min-h-[20rem] rounded-3xl border-2 border-slate-400">
@@ -24,15 +35,16 @@ const Uploader = ({
           className="flex flex-col items-center justify-center w-full h-[20rem] cursor-pointer text-gray-900"
         >
           <span className="mb-2 text-xl font-medium">
-            Choose a file or folder
+            Choose a {isFolder ? "folder" : "file"}
           </span>
           <span className="text-lg text-gray-400">{fileName}</span>
           <Input
+            ref={folderRef}
             id="file"
             type="file"
             className="hidden"
             onChange={handleChange}
-            {...(isFolder && { webkitdirectory: "true" })}
+            multiple={isFolder}
           />
         </Label>
       </div>

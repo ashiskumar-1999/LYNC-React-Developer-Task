@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Uploader from "@/components/Uploader";
 import ImageConverter from "@/utils/ImageConverter";
-import Sidebar from "@/components/SideNav";
+import SideNav from "@/components/SideNav";
 import { FileObject } from "@/types";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [fileName, setFileName] = useState("No files or folder chosen");
   const [file, setFile] = useState<File | FileList | null>();
   const [uploadFiles, setUploadFiles] = useState<FileObject[]>([]);
-  const [isFolderUpload, setIsFolderUpload] = useState<boolean>(false);
+  const [isFolderUpload, setIsFolderUpload] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const uploadedFiles = event.target.files;
@@ -147,13 +148,19 @@ export default function Home() {
   return (
     <div className="flex h-screen gap-x-96 items-center">
       <div>
-        <Sidebar
+        <SideNav
           files={uploadFiles}
           handleDelete={handleDeleteFiles}
           handleEdit={handleEditFiles}
         />
       </div>
-      <div>
+      <div className="space-y-4">
+        <Button
+          className="px-6 py-2 border border-slate-400 text-gray-900 rounded-md bg-transparent hover:bg-transparent"
+          onClick={() => setIsFolderUpload(!isFolderUpload)}
+        >
+          Select {isFolderUpload ? "File" : "Folder"}
+        </Button>
         <Uploader
           fileName={fileName}
           handleChange={handleChange}
