@@ -66,9 +66,9 @@ export default function Home() {
           JSON.stringify(updatedFiles)
         );
       } else {
-        toast({
+        /* toast({
           description: "This File already exists!",
-        });
+        }); */
       }
 
       // Reset file input
