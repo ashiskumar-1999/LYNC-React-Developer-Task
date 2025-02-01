@@ -57,7 +57,7 @@ const SideNav = ({ files, handleEdit, handleDelete }: SideNavProps) => {
 
   return (
     <Sidebar>
-      <SidebarContent className="bg-indigo-400">
+      <SidebarContent className="bg-indigo-600">
         <SidebarGroup>
           <SidebarGroupLabel className="py-8 text-3xl font-semibold text-white">
             File Explorer
